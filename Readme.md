@@ -1,9 +1,9 @@
 # Thumb Touch
 
-This is a basic library for handling touch input for a landscape "two thumb" use case. The library provides a control node "Thumb Touch" which should be position using the "Full Rect" layout. Then, each side of the screen will handle input for the respective thumb. 
+This is a basic library for handling touch input for a landscape "two thumb" use case. Each side of the screen will handle input for the respective thumb which comes in the form of both an invisible joystick direction and various signals for taps and gestures. 
 
 ## Usage
-The library provides the following outputs (note that each one comes with a left_ and right_ version):
+The library provides a control node "Thumb Touch" which should be position using the "Full Rect" layout. The following outputs are then provided (note that each one comes with a left_ and right_ version):
 
  - **joystick:** a normalized Vector2 of the current direction if the thumb is acting as a joystick i.e.being held on the screen, with the original touch location being the center of the joystick
  - **Signals:** tap, double_tap, swipe_up, swipe_down, swipe_left, swipe_right
