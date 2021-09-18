@@ -17,6 +17,16 @@ signal right_swipe_left
 onready var left = $Left
 onready var right = $Right
 
+export var dead_zone = 30
+export var double_tap_time = 0.2
+
+func _ready():
+	left.double_tap_timer.wait_time = double_tap_time
+	right.double_tap_timer.wait_time = double_tap_time
+	
+	left.dead_zone = dead_zone
+	right.dead_zone = dead_zone
+
 var left_joystick setget , get_left_joystick
 var right_joystick setget , get_right_joystick
 

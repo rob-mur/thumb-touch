@@ -1,7 +1,7 @@
 extends Control
 
-export var dead_zone = 30
-export var double_tap_time = 0.2
+var dead_zone
+
 var joystick_dir = Vector2()
 
 signal tap
@@ -14,9 +14,6 @@ signal swipe_right
 var original_position = Vector2()
 onready var double_tap_timer = $DoubleTapTimer
 var gesture_fired = false
-
-func _ready():
-	double_tap_timer.wait_time = double_tap_time
 
 func _gui_input(event):
 	if not (event is InputEventScreenTouch or event is InputEventScreenDrag):
