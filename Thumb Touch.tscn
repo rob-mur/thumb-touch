@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://TouchInput.gd" type="Script" id=1]
+[ext_resource path="res://Thumb Touch.gd" type="Script" id=2]
+
+[node name="Thumb Touch" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="Control" parent="."]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_right = 2.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="DoubleTapTimer" type="Timer" parent="Left"]
+one_shot = true
+
+[node name="Right" type="Control" parent="."]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="DoubleTapTimer" type="Timer" parent="Right"]
+one_shot = true
+
+[connection signal="double_tap" from="Left" to="." method="_on_Left_double_tap"]
+[connection signal="swipe_down" from="Left" to="." method="_on_Left_swipe_down"]
+[connection signal="swipe_left" from="Left" to="." method="_on_Left_swipe_left"]
+[connection signal="swipe_right" from="Left" to="." method="_on_Left_swipe_right"]
+[connection signal="swipe_up" from="Left" to="." method="_on_Left_swipe_up"]
+[connection signal="tap" from="Left" to="." method="_on_Left_tap"]
+[connection signal="timeout" from="Left/DoubleTapTimer" to="Left" method="_on_DoubleTapTimer_timeout"]
+[connection signal="double_tap" from="Right" to="." method="_on_Right_double_tap"]
+[connection signal="swipe_down" from="Right" to="." method="_on_Right_swipe_down"]
+[connection signal="swipe_left" from="Right" to="." method="_on_Right_swipe_left"]
+[connection signal="swipe_right" from="Right" to="." method="_on_Right_swipe_right"]
+[connection signal="swipe_up" from="Right" to="." method="_on_Right_swipe_up"]
+[connection signal="tap" from="Right" to="." method="_on_Right_tap"]
+[connection signal="timeout" from="Right/DoubleTapTimer" to="Right" method="_on_DoubleTapTimer_timeout"]
