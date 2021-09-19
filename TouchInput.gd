@@ -27,10 +27,9 @@ func _input(event):
 		if event.position.distance_to(original_position) < dead_zone:
 			joystick_dir = Vector2()
 			return
-		double_tap_timer.stop()		
 		joystick_dir = (event.position - original_position).normalized()
 		
-		if not gesture_fired:
+		if not gesture_fired and not double_tap_timer.is_stopped():
 			gesture_fired = true
 			var joystick_angle = joystick_dir.angle()
 			if - PI / 4 < joystick_angle and joystick_angle <= PI / 4:
@@ -41,6 +40,9 @@ func _input(event):
 				emit_signal("swipe_up")
 			else:
 				emit_signal("swipe_left")
+				
+		double_tap_timer.stop()		
+		
 
 func _gui_input(event):
 
