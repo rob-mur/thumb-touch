@@ -14,27 +14,16 @@ signal swipe_right
 var original_position = Vector2()
 onready var double_tap_timer = $DoubleTapTimer
 var gesture_fired = false
+var touch_id = -1
 
-func _gui_input(event):
-	if not (event is InputEventScreenTouch or event is InputEventScreenDrag):
-		return
+func _input(event):
+	if event is InputEventScreenTouch:
+		if not event.pressed and event.index == touch_id:
+			joystick_dir = Vector2()
+			gesture_fired = false	
+			touch_id = -1
 	
-	if event is InputEventScreenTouch and event.pressed:
-		original_position = event.position
-		
-		if double_tap_timer.is_stopped():
-			double_tap_timer.start()
-		else:
-			emit_signal("double_tap")
-			double_tap_timer.stop()
-		
-		return
-	
-	if event is InputEventScreenTouch and not event.pressed:
-		joystick_dir = Vector2()
-		gesture_fired = false
-		
-	if event is InputEventScreenDrag:
+	if event is InputEventScreenDrag and event.index == touch_id:
 		if event.position.distance_to(original_position) < dead_zone:
 			joystick_dir = Vector2()
 			return
@@ -52,6 +41,19 @@ func _gui_input(event):
 				emit_signal("swipe_up")
 			else:
 				emit_signal("swipe_left")
+
+func _gui_input(event):
+
+	if event is InputEventScreenTouch and event.pressed:
+		touch_id = event.index
+		original_position = event.position
+		
+		if double_tap_timer.is_stopped():
+			double_tap_timer.start()
+		else:
+			emit_signal("double_tap")
+			double_tap_timer.stop()
+
 		
 
 
